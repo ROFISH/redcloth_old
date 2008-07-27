@@ -2,8 +2,8 @@ module RedCloth
   module VERSION
     MAJOR = 4
     MINOR = 0
-    TINY  = 2
-    RELEASE_CANDIDATE = "FANGAMER_CUSTOM"
+    TINY  = 1
+    RELEASE_CANDIDATE = nil
 
     STRING = [MAJOR, MINOR, TINY].join('.')
     TAG = "REL_#{[MAJOR, MINOR, TINY, RELEASE_CANDIDATE].compact.join('_')}".upcase.gsub(/\.|-/, '_')

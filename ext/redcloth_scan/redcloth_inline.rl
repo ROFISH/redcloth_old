@@ -244,7 +244,6 @@ redcloth_inline(self, p, pe, refs)
   VALUE regs = Qnil;
   unsigned int opts = 0;
   VALUE buf = Qnil;
-	VALUE hash = Qnil;
   
   %% write init;
 

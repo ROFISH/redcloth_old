@@ -127,11 +127,6 @@ module RedCloth
   
       to(RedCloth::Formatters::LATEX)
     end
-    
-    def tehdebug( test )
-      p test
-      test.inspect
-    end
 
     private
     def apply_rules(rules)
