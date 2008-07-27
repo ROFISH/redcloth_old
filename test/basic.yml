@@ -221,6 +221,7 @@ desc: Strength can be give to text by surrounding with asterisks.  In HTML, this
 in: And then? She *fell*!
 html: <p>And then? She <strong>fell</strong>!</p>
 lite_mode_html: "And then? She <strong>fell</strong>!"
+general_disable_inline: <p>And then? She *fell*!</p>
 --- 
 name: force bold italics
 desc: Both italics and bold can be forced by doubling the underscores or asterisks.
@@ -250,6 +251,7 @@ name: del
 desc: To indicate a passage which has been deleted, surround the passage with hypens.
 in: I'm -sure- not sure.
 html: <p>I&#8217;m <del>sure</del> not sure.</p>
+general_disable_inline: <p>I&#8217;m -sure- not sure.</p>
 --- 
 name: ins
 desc: Pluses around a passage indicate its insertion.
@@ -320,6 +322,11 @@ html: |-
   when I <em class="big">sprouted</em> that<br />
   corn stalk from my<br />
   <span lang="es">cabeza</span>.</p>
+general_disable_inline: |-
+  <p>I seriously *{color:red}blushed*<br />
+  when I <em class="big">sprouted</em> that<br />
+  corn stalk from my<br />
+  <span lang="es">cabeza</span>.</p>
 --- 
 name: inline attributes preceded by text are treated as literal
 desc: modifiers must come first, without anything before them
@@ -330,6 +337,11 @@ in: |-
   %grande [es]cabeza%.
 html: |-
   <p>I <strong>seriously {color:red}blushed</strong><br />
+  when I <em>first (big)sprouted</em> that<br />
+  corn stalk from my<br />
+  <span>grande [es]cabeza</span>.</p>
+general_disable_inline: |-
+  <p>I *seriously {color:red}blushed*<br />
   when I <em>first (big)sprouted</em> that<br />
   corn stalk from my<br />
   <span>grande [es]cabeza</span>.</p>
@@ -774,6 +786,8 @@ in: |-
   before *(in parens)* after
 html: |-
   <p>before <strong>(in parens)</strong> after</p>
+general_disable_inline: |-
+  <p>before *(in parens)* after</p>
 ---
 name: parentheses in underscores in quotes
 in: |-

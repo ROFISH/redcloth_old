@@ -24,6 +24,10 @@ VALUE red_pass(VALUE, VALUE, VALUE, ID, VALUE);
 VALUE red_pass_code(VALUE, VALUE, VALUE, ID);
 
 /* parser macros */
+#define UNLESS_DISABLED_INLINE(H, T, F) \
+	if (rb_funcall(rb_funcall(self, rb_intern("disable_inline"), 0),rb_intern("include?"), 1,ID2SYM(rb_intern(#T))) == Qtrue) { rb_str_cat_escaped(self, H, ts, te); } \
+	else { F } 
+
 #define CLEAR_REGS()   regs = rb_hash_new(); rb_hash_aset(regs, ID2SYM(rb_intern("restrictions")), rb_iv_get(self, "@restrictions"));
 #define CAT(H)         rb_str_cat(H, ts, te-ts)
 #define CLEAR(H)       H = rb_str_new2("")

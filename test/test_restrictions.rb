@@ -38,4 +38,12 @@ class TestRestrictions < Test::Unit::TestCase
     RedCloth.new(doc['in'], [:no_span_caps]).to_html
   end
   
+  generate_formatter_tests('disable_inline_images') do |doc|
+    RedCloth.new(doc['in'], [:disable_inline=>:image]).to_html
+  end
+  
+  generate_formatter_tests('general_disable_inline') do |doc|
+    RedCloth.new(doc['in'], [:disable_inline=>[:strong,:del]]).to_html
+  end
+  
 end

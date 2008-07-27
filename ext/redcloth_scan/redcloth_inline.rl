@@ -86,42 +86,42 @@
 
   main := |*
 
-    image { INLINE(block, image); };
+    image { UNLESS_DISABLED_INLINE(block,image,INLINE(block, image);) };
 
-    link { PARSE_LINK_ATTR(link_text); PASS(block, name, link); };
-    bracketed_link { PARSE_LINK_ATTR(link_text); PASS(block, name, link); };
+    link { UNLESS_DISABLED_INLINE(block,link,PARSE_LINK_ATTR(link_text); PASS(block, name, link);) };
+    bracketed_link { UNLESS_DISABLED_INLINE(block,bracketed_link,PARSE_LINK_ATTR(link_text); PASS(block, name, link);) };
 
-    code { PARSE_ATTR(text); PASS_CODE(block, text, code, opts); };
+    code { UNLESS_DISABLED_INLINE(block,code,PARSE_ATTR(text); PASS_CODE(block, text, code, opts);) };
     code_tag_start { CAT(block); fgoto code_tag; };
     notextile { INLINE(block, notextile); };
-    strong { PARSE_ATTR(text); PASS(block, text, strong); };
-    b { PARSE_ATTR(text); PASS(block, text, b); };
-    em { PARSE_ATTR(text); PASS(block, text, em); };
-    i { PARSE_ATTR(text); PASS(block, text, i); };
-    del { PASS(block, text, del); };
-    del_phrase { PASS(block, text, del_phrase); };
-    ins { PARSE_ATTR(text); PASS(block, text, ins); };
-    sup { PARSE_ATTR(text); PASS(block, text, sup); };
-    sub { PARSE_ATTR(text); PASS(block, text, sub); };
-    span { PARSE_ATTR(text); PASS(block, text, span); };
-    cite { PARSE_ATTR(text); PASS(block, text, cite); };
+    strong { UNLESS_DISABLED_INLINE(block,strong,PARSE_ATTR(text); PASS(block, text, strong);) };
+    b { UNLESS_DISABLED_INLINE(block,b,PARSE_ATTR(text); PASS(block, text, b);) };
+    em { UNLESS_DISABLED_INLINE(block,em,PARSE_ATTR(text); PASS(block, text, em);) };
+    i { UNLESS_DISABLED_INLINE(block,i,PARSE_ATTR(text); PASS(block, text, i);) };
+    del { UNLESS_DISABLED_INLINE(block,del,PASS(block, text, del);) };
+    del_phrase { UNLESS_DISABLED_INLINE(block,del,PASS(block, text, del_phrase);) };
+    ins { UNLESS_DISABLED_INLINE(block,ins,PARSE_ATTR(text); PASS(block, text, ins);) };
+    sup { UNLESS_DISABLED_INLINE(block,sup,PARSE_ATTR(text); PASS(block, text, sup);) };
+    sub { UNLESS_DISABLED_INLINE(block,sub,PARSE_ATTR(text); PASS(block, text, sub);) };
+    span { UNLESS_DISABLED_INLINE(block,span,PARSE_ATTR(text); PASS(block, text, span);) };
+    cite { UNLESS_DISABLED_INLINE(block,cite,PARSE_ATTR(text); PASS(block, text, cite);) };
     ignore => ignore;
-    snip { PASS(block, text, snip); };
-    quote1 { PASS(block, text, quote1); };
-    quote2 { PASS(block, text, quote2); };
+    snip { UNLESS_DISABLED_INLINE(block,snip,PASS(block, text, snip);) };
+    quote1 { UNLESS_DISABLED_INLINE(block,quote1,PASS(block, text, quote1);) };
+    quote2 { UNLESS_DISABLED_INLINE(block,quote2,PASS(block, text, quote2);) };
 
-    ellipsis { INLINE(block, ellipsis); };
-    emdash { INLINE(block, emdash); };
-    endash { INLINE(block, endash); };
-    arrow { INLINE(block, arrow); };
-    caps { INLINE(block, caps); };
-    acronym { INLINE(block, acronym); };
-    dim { PASS(block, text, dim); };
-    trademark { INLINE(block, trademark); };
-    registered { INLINE(block, registered); };
-    copyright { INLINE(block, copyright); };
-    footno { PASS(block, text, footno); };
-    entity { INLINE(block, entity); };
+    ellipsis { UNLESS_DISABLED_INLINE(block,ellipsis,INLINE(block, ellipsis);) };
+    emdash { UNLESS_DISABLED_INLINE(block,emdash,INLINE(block, emdash);) };
+    endash { UNLESS_DISABLED_INLINE(block,endash,INLINE(block, endash);) };
+    arrow { UNLESS_DISABLED_INLINE(block,arrow,INLINE(block, arrow);) };
+    caps { UNLESS_DISABLED_INLINE(block,caps,INLINE(block, caps);) };
+    acronym { UNLESS_DISABLED_INLINE(block,acronym,INLINE(block, acronym);) };
+    dim { UNLESS_DISABLED_INLINE(block,dim,PASS(block, text, dim);) };
+    trademark { UNLESS_DISABLED_INLINE(block,trademark,INLINE(block, trademark);) };
+    registered { UNLESS_DISABLED_INLINE(block,registered,INLINE(block, registered);) };
+    copyright { UNLESS_DISABLED_INLINE(block,copyright,INLINE(block, copyright);) };
+    footno { UNLESS_DISABLED_INLINE(block,footno,PASS(block, text, footno);) };
+    entity { UNLESS_DISABLED_INLINE(block,entity,INLINE(block, entity);) };
 
     script_tag { INLINE(block, inline_html); };
     start_tag { INLINE(block, inline_html); };
@@ -244,6 +244,7 @@ redcloth_inline(self, p, pe, refs)
   VALUE regs = Qnil;
   unsigned int opts = 0;
   VALUE buf = Qnil;
+	VALUE hash = Qnil;
   
   %% write init;
 
