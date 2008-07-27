@@ -315,7 +315,7 @@ int SYM_escape_preformatted;
     list_start      { list_layout = rb_ary_new(); LIST_ITEM(); fgoto list; };
     dl_start        { p = ts; INLINE(html, dl_open); ASET(type, dt); fgoto dl; };
     table           { INLINE(table, table_close); DONE(table); fgoto block; };
-    link_alias      { rb_hash_aset(refs_found, rb_hash_aref(regs, ID2SYM(rb_intern("text"))), rb_hash_aref(regs, ID2SYM(rb_intern("href")))); DONE(block); };
+    link_alias      { UNLESS_DISABLED_INLINE(block,link_alias,rb_hash_aset(refs_found, rb_hash_aref(regs, ID2SYM(rb_intern("text"))), rb_hash_aref(regs, ID2SYM(rb_intern("href")))); DONE(block);) };
     aligned_image   { rb_hash_aset(regs, ID2SYM(rb_intern("type")), plain_block); fgoto block; };
     redcloth_version { INLINE(html, redcloth_version); };
     blank_line => cat;
